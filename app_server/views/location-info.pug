@@ -1,0 +1,128 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+block head
+    script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js')
+    link(rel='stylesheet', href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    link(rel="stylesheet", href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css")
+block content
+    .row.page-header: .col-lg-12
+            h1= pageHeader.title
+    .row
+        .col-xs-12.col-md-10
+            .row
+                .col-xs-12.col-sm-6
+                    p.rating
+                        +outputRating(location.rating)
+                    p= location.address
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Opening hours
+                        .panel-body
+                            each time in location.openingTimes
+                                p
+                                    | #{time.days} : 
+                                    if time.closed
+                                        | closed
+                                    else
+                                        | #{time.opening} - #{time.closing}
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Facilities
+                        .panel-body
+                            each facility in location.facilities
+                                span.label.label-warning
+                                    span.glyphicon.glyphicon-ok
+                                    | &nbsp;#{facility}
+                                | &nbsp;
+                .col-xs-12.col-sm-6.location-map
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Location map
+                        .panel-body
+                            #map(style="height: 400px;")
+                            #instructions
+
+            .row
+                .col-xs-12
+                    .panel.panel-primary.review-panel
+                        .panel-heading
+                            a.btn.btn-default.pull-right(href="/location/#{location._id}/review/new") Add review
+                            h2.panel-title Customer reviews
+                        .panel-body.review-container
+                            each review in location.reviews
+                                .row
+                                    .review
+                                        .well.well-sm.review-header
+                                            span.rating
+                                                +outputRating(review.rating)
+                                            span.reviewAuthor #{review.author}
+                                            small.reviewTimestamp
+                                                +formatDate(review.createdOn)
+                                        .col-xs-12
+                                            p !{(review.reviewText).replace(/\n/g, '<br/>')}
+        .col-xs-12.col-md-2
+            p.lead #{location.name} #{sidebar.context}
+            p= sidebar.callToAction
+block script
+    script.
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10',
+            center: [109.204473, 12.2706404],
+            zoom: 16
+        });
+
+        // this is where the code from the next step will go
+        map.on('load', function () {
+                getRoute();
+        });
+
+        function getRoute() {
+            var start = [109.202156, 12.271018];
+            var end = [109.204205, 12.268397];
+            var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+            $.ajax({
+                method: 'GET',
+                url: directionsRequest,
+            }).done(function (data) {
+                var route = data.routes[0].geometry;
+
+                map.addLayer({
+                    id: 'route',
+                    type: 'line',
+                    source: {
+                        type: 'geojson',
+                        data: {
+                            type: 'Feature',
+                            geometry: route
+                        }
+                    },
+                    paint: {
+                        'line-width': 2
+                    }
+                });
+
+                // var marker = new mapboxgl.Marker().setLngLat(start).addTo(map);
+
+
+                var startButton = document.createElement('div');
+                startButton.className = 'marker-start';
+                new mapboxgl.Marker(startButton)
+                    .setLngLat(start)
+                    .addTo(map);
+                new mapboxgl.Marker()
+                    .setLngLat(end)
+                    .addTo(map);
+
+
+                //- var instructions = document.getElementById('instructions');
+                //- var steps = data.routes[0].legs[0].steps;
+                //- steps.forEach(function (step) {
+                //-     instructions.insertAdjacentHTML('beforeend', '<p>' + step.maneuver.instruction + '</p>');
+                //- });
+                // this is where the code from the next step will go
+            });
+        }

@@ -76,9 +76,9 @@ module.exports.homelist = function(req, res){
     method : "GET",
     json : {},
     qs : {
-      lng : -0.7992599,
-      lat : 51.378091,
-      maxDistance : 20
+      lng : 109.2040678,
+      lat : 12.2697138,
+      maxDistance : 100
     }
   };
   request(
@@ -88,6 +88,7 @@ module.exports.homelist = function(req, res){
       data = body;
       if (response.statusCode === 200 && data.length) {
         for (i=0; i<data.length; i++) {
+          console.log(data[i].distance);
           data[i].distance = _formatDistance(data[i].distance);
         }
       }

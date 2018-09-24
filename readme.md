@@ -1,35 +1,17 @@
-# Getting MEAN application code
+Start up
+109.2007077, 12.2704601
+// static
+https://api.mapbox.com/v4/mapbox.dark/-76.9,38.9,5/400x200.png?access_token=pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w
 
-This is the code for the sample 'Loc8r' application that is built through the course of my book [Getting MEAN](https://www.manning.com/books/getting-mean-with-mongo-express-angular-and-node).
-
-Getting MEAN is published by Manning, and teaches readers how to develop web applications end-to-end using the MEAN stack.
-
-## The application at various stages
-
-There are named branches for the various states of the code throughout the book:
-
-* `master` **Chapter 3 start**: A blank Express 4.9.0 project
-* `chapter-03` **Chapter 3 end**: Creating and setting up a MEAN project
-* `chapter-04-views` **Chapter 4 mid-point**: The data is hard coded into views
-* `chapter-04` **Chapter 4 end**: Building a static site with Node.js and Express
-* `chapter-05` **Chapter 5**: Building a data model with MongoDB and Mongoose
-* `chapter-06` **Chapter 6**: Writing a REST API: Exposing your MongoDB database to the application
-* `chapter-07` **Chapter 7**: Consuming a REST API: Using an API from inside Express
-* `chapter-08` **Chapter 8**: Adding Angular components to an Express application
-* `chapter-09` **Chapter 9**: Building a Single Page Application with Angular: Foundations
-* `chapter-10` **Chapter 10**: Building a Single Page Application with Angular: The next level
-* `chapter-11` **Chapter 11**: Authenticating users, managing sessions and securing APIs
-
-## Get the code
-
-To get the code for a specific branch:
-
-`$ git clone -b branch-name https://github.com/simonholmes/getting-MEAN.git`
-
-Then change into the folder the git clone command will create:
-
-`$ cd getting-MEAN`
-
-And finally install the dependencies:
-
-`npm install`
+Mapbox note
+    Adjust a layer's opacity
+    Animate a line // vẽ đường
+    Change building color based on zoom
+    Animate a point
+    display and style rich text labels // dùng để hiển thị cả tiếng anh và tiếng bản địa
+    Add a geoJson line
+    Center on symbol
+    fly to a location
+    fit a map to a bounding box
+    locate the user  // cho biết vị trí hiện tại
+    mapbox-gl-directions https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-directions/

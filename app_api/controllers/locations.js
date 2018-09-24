@@ -105,6 +105,7 @@ module.exports.locationsReadOne = function(req, res) {
 /* /api/locations */
 module.exports.locationsCreate = function(req, res) {
   console.log(req.body);
+  console.log(req.body.days1);
   Loc.create({
     name: req.body.name,
     address: req.body.address,
@@ -123,6 +124,7 @@ module.exports.locationsCreate = function(req, res) {
     }]
   }, function(err, location) {
     if (err) {
+      console.log(location);
       console.log(err);
       sendJSONresponse(res, 400, err);
     } else {
