@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// const mbxDirections = require('@mapbox/mapbox-sdk/services/directions');
+
 require('./app_api/models/db');
 
 var routes = require('./app_server/routes/index');

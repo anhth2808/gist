@@ -52,16 +52,16 @@ var renderHomepage = function(req, res, responseBody){
     responseBody = [];
   } else {
     if (!responseBody.length) {
-      message = "No places found nearby";
+      message = "Không có chổ nào gần hết !!!";
     }
   }
   res.render('locations-list', {
-    title: 'Loc8r - find a place to work with wifi',
+    title: 'GIST - tìm một tiệm caffe có wifi gần bạn!',
     pageHeader: {
-      title: 'Loc8r',
-      strapline: 'Find places to work with wifi near you!'
+      title: 'GIST',
+      strapline: 'Tìm một tiệm caffe có wifi gần bạn!'
     },
-    sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
+    sidebar: "Bạn muốn một chỗ ngồi với wifi? Với GIS bạn có thể tìm một tiệm cafe gần bạn.",
     locations: responseBody,
     message: message
   });
@@ -76,9 +76,9 @@ module.exports.homelist = function(req, res){
     method : "GET",
     json : {},
     qs : {
-      lng : 109.2040678,
-      lat : 12.2697138,
-      maxDistance : 100
+      lng: 109.202156,
+      lat: 12.271018,
+      maxDistance : 100000000
     }
   };
   request(
@@ -127,8 +127,8 @@ var renderDetailPage = function (req, res, locDetail) {
     title: locDetail.name,
     pageHeader: {title: locDetail.name},
     sidebar: {
-      context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
-      callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
+      context: 'có trên GIST vì có wifi để giúp bạn làm việc, học tập và giải trí',
+      callToAction: "Nếu như bạn thích hoặc không thích " + locDetail.name +", dừng quên để lại review của bạn."
     },
     location: locDetail
   });

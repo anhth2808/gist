@@ -18,7 +18,7 @@ block content
                     p= location.address
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Opening hours
+                            h2.panel-title Giờ mở cửa
                         .panel-body
                             each time in location.openingTimes
                                 p
@@ -29,7 +29,7 @@ block content
                                         | #{time.opening} - #{time.closing}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Facilities
+                            h2.panel-title Menu
                         .panel-body
                             each facility in location.facilities
                                 span.label.label-warning
@@ -39,7 +39,7 @@ block content
                 .col-xs-12.col-sm-6.location-map
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Location map
+                            h2.panel-title Vị trí bản đồ
                         .panel-body
                             #map(style="height: 400px;")
                             #instructions
@@ -48,8 +48,8 @@ block content
                 .col-xs-12
                     .panel.panel-primary.review-panel
                         .panel-heading
-                            a.btn.btn-default.pull-right(href="/location/#{location._id}/review/new") Add review
-                            h2.panel-title Customer reviews
+                            a.btn.btn-default.pull-right(href="/location/#{location._id}/review/new") Thêm review
+                            h2.panel-title Review
                         .panel-body.review-container
                             each review in location.reviews
                                 .row
@@ -70,8 +70,8 @@ block script
         mapboxgl.accessToken = 'pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v10',
-            center: [109.204473, 12.2706404],
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [109.203473, 12.2696404],
             zoom: 16
         });
 

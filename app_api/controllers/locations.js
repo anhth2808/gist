@@ -23,18 +23,32 @@ var theEarth = (function() {
   };
 })();
 
+var meterConversion = (function () {
+  var mToKm = function (distance) {
+    return parseFloat(distance / 1000);
+  };
+  var kmToM = function (distance) {
+    return parseFloat(distance * 1000);
+  };
+  return {
+    mToKm: mToKm,
+    kmToM: kmToM
+  };
+})();
 /* GET list of locations */
 module.exports.locationsListByDistance = function(req, res) {
   var lng = parseFloat(req.query.lng);
   var lat = parseFloat(req.query.lat);
+
   var maxDistance = parseFloat(req.query.maxDistance);
+  console.log(maxDistance);
   var point = {
     type: "Point",
     coordinates: [lng, lat]
   };
   var geoOptions = {
     spherical: true,
-    maxDistance: theEarth.getRadsFromDistance(maxDistance),
+    maxDistance: meterConversion.kmToM(maxDistance),
     num: 10
   };
   if ((!lng && lng!==0) || (!lat && lat!==0) || ! maxDistance) {
@@ -44,6 +58,7 @@ module.exports.locationsListByDistance = function(req, res) {
     });
     return;
   }
+  console.log(geoOptions.maxDistance);
   Loc.geoNear(point, geoOptions, function(err, results, stats) {
     var locations;
     console.log('Geo Results', results);
@@ -53,6 +68,7 @@ module.exports.locationsListByDistance = function(req, res) {
       sendJSONresponse(res, 404, err);
     } else {
       locations = buildLocationList(req, res, results, stats);
+      console.log("locations in geoNear:", locations);
       sendJSONresponse(res, 200, locations);
     }
   });
@@ -62,7 +78,7 @@ var buildLocationList = function(req, res, results, stats) {
   var locations = [];
   results.forEach(function(doc) {
     locations.push({
-      distance: theEarth.getDistanceFromRads(doc.dis),
+      distance: meterConversion.mToKm(doc.dis),
       name: doc.obj.name,
       address: doc.obj.address,
       rating: doc.obj.rating,
@@ -90,7 +106,6 @@ module.exports.locationsReadOne = function(req, res) {
           sendJSONresponse(res, 404, err);
           return;
         }
-        console.log(location);
         sendJSONresponse(res, 200, location);
       });
   } else {
@@ -104,8 +119,6 @@ module.exports.locationsReadOne = function(req, res) {
 /* POST a new location */
 /* /api/locations */
 module.exports.locationsCreate = function(req, res) {
-  console.log(req.body);
-  console.log(req.body.days1);
   Loc.create({
     name: req.body.name,
     address: req.body.address,
@@ -124,11 +137,9 @@ module.exports.locationsCreate = function(req, res) {
     }]
   }, function(err, location) {
     if (err) {
-      console.log(location);
       console.log(err);
       sendJSONresponse(res, 400, err);
     } else {
-      console.log(location);
       sendJSONresponse(res, 201, location);
     }
   });
