@@ -6,23 +6,6 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
-var theEarth = (function() {
-  var earthRadius = 6371; // km, miles is 3959
-
-  var getDistanceFromRads = function(rads) {
-    return parseFloat(rads * earthRadius);
-  };
-
-  var getRadsFromDistance = function(distance) {
-    return parseFloat(distance / earthRadius);
-  };
-
-  return {
-    getDistanceFromRads: getDistanceFromRads,
-    getRadsFromDistance: getRadsFromDistance
-  };
-})();
-
 var meterConversion = (function () {
   var mToKm = function (distance) {
     return parseFloat(distance / 1000);

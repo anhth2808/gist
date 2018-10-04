@@ -15,3 +15,7 @@ Mapbox note
     fit a map to a bounding box
     locate the user  // cho biết vị trí hiện tại
     mapbox-gl-directions https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-directions/
+
+// note
+layout cần 1 nút refresh -> làm mới lại postion
+    Nâng cao: dùng socketio auto làm mới lại vị trí hiện tại (bỏ nút refresh)

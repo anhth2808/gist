@@ -4,7 +4,6 @@ include _includes/sharedHTMLfunctions
 block head
     script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js')
     link(rel='stylesheet', href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css')
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
     link(rel="stylesheet", href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css")
 block content
     .row.page-header: .col-lg-12
@@ -63,7 +62,7 @@ block content
                                         .col-xs-12
                                             p !{(review.reviewText).replace(/\n/g, '<br/>')}
         .col-xs-12.col-md-2
-            p.lead #{location.name} #{sidebar.context}
+            p.lead #{sidebar.context}
             p= sidebar.callToAction
 block script
     script.

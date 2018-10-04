@@ -78,7 +78,7 @@ module.exports.homelist = function(req, res){
     qs : {
       lng: 109.202156,
       lat: 12.271018,
-      maxDistance : 100000000
+      maxDistance : 10000
     }
   };
   request(
@@ -127,8 +127,8 @@ var renderDetailPage = function (req, res, locDetail) {
     title: locDetail.name,
     pageHeader: {title: locDetail.name},
     sidebar: {
-      context: 'có trên GIST vì có wifi để giúp bạn làm việc, học tập và giải trí',
-      callToAction: "Nếu như bạn thích hoặc không thích " + locDetail.name +", dừng quên để lại review của bạn."
+      context: "Nếu như bạn thích hoặc không thích " + locDetail.name + ", dừng quên để lại review.",
+      callToAction: "Bạn có thể tham khảo bản đồ chỉ đường của GIST."
     },
     location: locDetail
   });
