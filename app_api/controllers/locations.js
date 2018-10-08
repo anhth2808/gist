@@ -88,6 +88,7 @@ module.exports.locationsReadOne = function(req, res) {
                     sendJSONresponse(res, 404, err);
                     return;
                 }
+                console.log("location:", location)
                 sendJSONresponse(res, 200, location);
             });
     } else {
