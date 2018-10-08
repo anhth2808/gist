@@ -48,6 +48,8 @@ var locationSchema = new mongoose.Schema({
     },
     openingTimes: [openingTimeSchema],
     reviews: [reviewSchema]
+}, {
+    usePushEach: true // add this becasue $push all is nolonger support in mongose 3.4>
 });
 
 mongoose.model('Location', locationSchema);
