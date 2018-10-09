@@ -150,6 +150,7 @@ var renderDetailPage = function (req, res, locDetail) {
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res){
     getLocationInfo(req, res, function(req, res, responseData) {
+        console.log("locationInfo render");
         renderDetailPage(req, res, responseData);
     });
 };
