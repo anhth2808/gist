@@ -149,9 +149,37 @@ var renderDetailPage = function (req, res, locDetail) {
 
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res){
-    getLocationInfo(req, res, function(req, res, responseData) {
-        console.log("locationInfo render");
-        renderDetailPage(req, res, responseData);
+    renderDetailPage(req, res, {
+        _id: '5ba5e0005fa3012f78ad4961',
+        name: 'Milano Tưởng Tượng',
+        address: '61/8 Đoàn Trần Nghiệp',
+        coords: { lng: 109.204205, lat: 12.268397 },
+        __v: 0,
+        reviews:
+            [{
+                author: 'Trần Hoàng Em',
+                rating: 5,
+                reviewText: 'awesome',
+                _id: '5bb8f8a87e6f0379482f9a2a',
+                createdOn: '2018-10-06T18:02:16.066Z'
+            }],
+        openingTimes:
+            [{
+                days: 'Thứ 2 - Thứ 3',
+                opening: '8:00am',
+                closing: '5:00pm',
+                closed: false,
+                _id: '5ba5e0005fa3012f78ad4963'
+            },
+            {
+                days: 'Thứ 7 - Chủ nhập',
+                opening: '8:00am',
+                closing: '5:00pm',
+                closed: false,
+                _id: '5ba5e0005fa3012f78ad4962'
+            }],
+        facilities: ['Power', 'Cafe', 'Bánh', 'Sinh tố', 'Balal....'],
+        rating: 5
     });
 };
 
