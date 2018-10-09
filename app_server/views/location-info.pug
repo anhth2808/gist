@@ -64,65 +64,65 @@ block content
             p.lead #{sidebar.context}
             p= sidebar.callToAction
 block script
-    script.
-        function getLocation(callback) {
-            if (navigator.geolocation) {
-                var lat_lng = navigator.geolocation.getCurrentPosition(function (position) {
-                    var user_position = {};
-                    user_position.lat = position.coords.latitude;
-                    user_position.lng = position.coords.longitude;
-                    callback(user_position);
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
+    //- script.
+    //-     function getLocation(callback) {
+    //-         if (navigator.geolocation) {
+    //-             var lat_lng = navigator.geolocation.getCurrentPosition(function (position) {
+    //-                 var user_position = {};
+    //-                 user_position.lat = position.coords.latitude;
+    //-                 user_position.lng = position.coords.longitude;
+    //-                 callback(user_position);
+    //-             });
+    //-         } else {
+    //-             alert("Geolocation is not supported by this browser.");
+    //-         }
+    //-     }
         
 
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v9',
-            center: [!{location.coords.lng}, !{location.coords.lat}],
-            zoom: 16
-        });
+    //-     mapboxgl.accessToken = 'pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w';
+    //-     var map = new mapboxgl.Map({
+    //-         container: 'map',
+    //-         style: 'mapbox://styles/mapbox/streets-v9',
+    //-         center: [!{location.coords.lng}, !{location.coords.lat}],
+    //-         zoom: 16
+    //-     });
 
-        // this is where the code from the next step will go
-        map.on('load', function () {
-            getLocation(function (lat_lng) {
-                var start = [lat_lng.lng, lat_lng.lat];
-                var end = [!{location.coords.lng}, !{location.coords.lat}];
-                var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
-                $.ajax({
-                    method: 'GET',
-                    url: directionsRequest,
-                }).done(function (data) {
-                    var route = data.routes[0].geometry;
+    //-     // this is where the code from the next step will go
+    //-     map.on('load', function () {
+    //-         getLocation(function (lat_lng) {
+    //-             var start = [lat_lng.lng, lat_lng.lat];
+    //-             var end = [!{location.coords.lng}, !{location.coords.lat}];
+    //-             var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+    //-             $.ajax({
+    //-                 method: 'GET',
+    //-                 url: directionsRequest,
+    //-             }).done(function (data) {
+    //-                 var route = data.routes[0].geometry;
 
-                    map.addLayer({
-                        id: 'route',
-                        type: 'line',
-                        source: {
-                            type: 'geojson',
-                            data: {
-                                type: 'Feature',
-                                geometry: route
-                            }
-                        },
-                        paint: {
-                            'line-width': 2
-                        }
-                    });
+    //-                 map.addLayer({
+    //-                     id: 'route',
+    //-                     type: 'line',
+    //-                     source: {
+    //-                         type: 'geojson',
+    //-                         data: {
+    //-                             type: 'Feature',
+    //-                             geometry: route
+    //-                         }
+    //-                     },
+    //-                     paint: {
+    //-                         'line-width': 2
+    //-                     }
+    //-                 });
 
-                    var startButton = document.createElement('div');
-                    startButton.className = 'marker-start';
-                    new mapboxgl.Marker(startButton)
-                        .setLngLat(start)
-                        .addTo(map);
-                    new mapboxgl.Marker()
-                        .setLngLat(end)
-                        .addTo(map);
-                });
-            });
-        });
+    //-                 var startButton = document.createElement('div');
+    //-                 startButton.className = 'marker-start';
+    //-                 new mapboxgl.Marker(startButton)
+    //-                     .setLngLat(start)
+    //-                     .addTo(map);
+    //-                 new mapboxgl.Marker()
+    //-                     .setLngLat(end)
+    //-                     .addTo(map);
+    //-             });
+    //-         });
+    //-     });
