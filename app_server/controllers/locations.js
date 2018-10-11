@@ -1,5 +1,11 @@
 var request = require('request');
+var mongoose = require("mongoose");
+var Loc = mongoose.model("Location");
 
+var sendJSONresponse = function(res, status, content) {
+    res.status(status);
+    res.json(content);
+};
 
 var apiOptions = {
     server : "http://localhost:3000"
@@ -49,29 +55,30 @@ module.exports.homelist = function(req, res){
 };
 
 var getLocationInfo = function (req, res, callback) {
-    var requestOptions, path;
-    
-    path = "/api/locations/" + req.params.locationid;
-    requestOptions = {
-        url : apiOptions.server + path,
-        method : "GET",
-        json : {}
-    };   
-    request(
-        requestOptions,
-        function(err, response, body) {
-            var data = body;
-            if (response.statusCode === 200) {
-                data.coords = {
-                    lng : body.coords[0],
-                    lat : body.coords[1]
-                };
-                callback(req, res, data);
-            } else {
-                _showError(req, res, response.statusCode);
+    // handle here
+    Loc
+        .findById(req.params.locationid)
+        .exec(function (err, location) {
+            if (!location) {
+                sendJSONresponse(res, 404, {
+                    "message": "locationid not found"
+                });
+                return;
+            } else if (err) {
+                console.log(err);
+                sendJSONresponse(res, 404, err);
+                return;
             }
-        }
-    );
+            // console.log("location:", location);
+            var x = JSON.stringify(location);
+            var data = JSON.parse(x);
+            data.coords = {
+                lng: location.coords[0],
+                lat: location.coords[1],
+            };
+            console.log("data:", data);
+            callback(req, res, data);
+        });
 };
 
 var renderDetailPage = function (req, res, locDetail) {
