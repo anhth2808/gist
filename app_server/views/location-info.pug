@@ -91,6 +91,7 @@ block script
         // this is where the code from the next step will go
         map.on('load', function () {
             getLocation(function (lat_lng) {
+                console.log(lat_lng);
                 var start = [lat_lng.lng, lat_lng.lat];
                 var end = [!{location.coords.lng}, !{location.coords.lat}];
                 var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;

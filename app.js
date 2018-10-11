@@ -102,7 +102,6 @@ var _formatDistance = function (distance) {
 io.on("connection", function (socket) {
     console.log("Made socket connection", socket.id);
     socket.on("send:coords", function (dt) {
-        console.log("dt:", dt);
         path = '/api/locations';
         requestOptions = {
             url: apiOptions.server + path,

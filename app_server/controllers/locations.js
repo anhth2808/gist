@@ -9,28 +9,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-
-
-var _isNumeric = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-};
-
-var _formatDistance = function (distance) {
-    var numDistance, unit;
-    if (distance && _isNumeric(distance)) {
-        if (distance > 1) {
-            numDistance = parseFloat(distance).toFixed(1);
-            unit = 'km';
-        } else {
-            numDistance = parseInt(distance * 1000,10);
-            unit = 'm';
-        }
-        return numDistance + unit;
-    } else {
-        return "?";
-    }
-};
-
 var _showError = function (req, res, status) {
     var title, content;
     if (status === 404) {
@@ -50,45 +28,6 @@ var _showError = function (req, res, status) {
     });
 };
 
-
-function getCurrentPosition(req, res) {
-    var io = req.app.get("socketio");
-
-    io.on("connection", function(socket){
-        console.log("Made socket connection", socket.id);
-
-        socket.on("send:coords", function (dt) {
-            console.log("dt:", dt);
-            path = '/api/locations';
-            requestOptions = {
-                url: apiOptions.server + path,
-                method: "GET",
-                json: {},
-                qs: {
-                    lng: dt.coords.lng,
-                    lat: dt.coords.lat,
-                    maxDistance: 1000
-                }
-            };
-            request(
-                requestOptions,
-                function (err, response, body) {
-                    var i, data;
-                    data = body;
-                    if (response.statusCode === 200 && data.length) {
-                        for (i = 0; i < data.length; i++) {
-                            data[i].distance = _formatDistance(data[i].distance);
-                        }
-                    }
-                    // render
-                    socket.emit("load:coords", data);
-                }
-            );
-        });
-
-    });
-
-}
 
 
 

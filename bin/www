@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-var debug = require('debug')('Express4');
-var app = require('../app');
-
-
-
-
