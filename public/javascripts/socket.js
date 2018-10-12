@@ -3,7 +3,7 @@
 var hostname = "";
 
 if (window.location.hostname === "gist1.herokuapp.com") {
-    hostname = "http://gist1.herokuapp.com";
+    hostname = "https://gist1.herokuapp.com";
 } else {
     hostname = "http://localhost:3000";
 }
