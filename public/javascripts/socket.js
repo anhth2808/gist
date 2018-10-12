@@ -118,5 +118,6 @@ function updateItem(data) {
 
 // Emit event
 socket.on("load:coords", function (data) {
+    console.log("load data:", data);
     updateItem(data);
 });

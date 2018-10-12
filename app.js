@@ -124,6 +124,7 @@ io.on("connection", function (socket) {
                     }
                 }
                 // render
+                console.log("emit data:", data);
                 socket.emit("load:coords", data);
             }
         );
