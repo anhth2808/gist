@@ -1,4 +1,4 @@
-Start up
+
 109.2007077, 12.2704601
 // static
 https://api.mapbox.com/v4/mapbox.dark/-76.9,38.9,5/400x200.png?access_token=pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w
@@ -22,3 +22,4 @@ Mapbox note
 layout cần 1 nút refresh -> làm mới lại postion
     Tạo 1 cái chờ vài giây cho refresh
     Nâng cao: dùng socketio auto làm mới lại vị trí hiện tại (bỏ nút refresh)
+location-info tạo nút reload lại vị trí bản thân.

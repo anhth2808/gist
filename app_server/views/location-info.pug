@@ -116,12 +116,17 @@ block script
                         }
                     });
 
-                    var startButton = document.createElement('div');
-                    startButton.className = 'marker-start';
-                    new mapboxgl.Marker(startButton)
+                    var startMarker = document.createElement('div');
+                    var cafeMarker = document.createElement('div');
+                    startMarker.className = 'start-marker';
+                    cafeMarker.className = 'cafe-marker';
+                    
+
+
+                    new mapboxgl.Marker(startMarker)
                         .setLngLat(start)
                         .addTo(map);
-                    new mapboxgl.Marker()
+                    new mapboxgl.Marker(cafeMarker)
                         .setLngLat(end)
                         .addTo(map);
                 });

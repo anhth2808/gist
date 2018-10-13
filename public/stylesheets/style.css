@@ -4,8 +4,17 @@
 .reviewAuthor {margin: 0 5px;}
 .reviewTimestamp {color: #ccc;}
 
-.marker-start {
+.start-marker {
     background-image: url('./../images/start.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.cafe-marker {
+    background-image: url('./../images/cafe-icon.svg');
     background-size: cover;
     width: 30px;
     height: 30px;

@@ -50,7 +50,6 @@ var renderHomepage = function(req, res){
 
 /* GET 'home' page */
 module.exports.homelist = function(req, res){
-    // getCurrentPosition(req, res);
     renderHomepage(req, res);
 };
 
