@@ -1,5 +1,152 @@
-extends layout
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        
+        script(src="/javascripts/jquery-1.11.1.min.js")
+        link(rel='stylesheet', href='/dist/css/bootstrap.min.css')
+        script(src="/dist/js/bootstrap.min.js")
 
-block content
-    h1= title
-    p Welcome to #{title}
+        //- script(src="http://code.jquery.com/jquery-1.11.1.min.js")
+        //- link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+        //- link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css')
+        //- script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+
+
+
+
+        //- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        //- <!-- Latest compiled and minified CSS -->
+        //- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        //- <!-- Optional theme -->
+        //- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        
+        //- <!-- Latest compiled and minified JavaScript -->
+        //- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+        style.
+            .hide-bullets {
+                list-style:none;
+                margin-left: -40px;
+                margin-top:20px;
+            }
+
+        block head
+    body
+        .container
+            #main_area
+                // Slider
+                .row
+                    #slider.col-xs-12
+                        // Top part of the slider
+                        .row
+                            #carousel-bounding-box.col-sm-8
+                                #myCarousel.carousel.slide
+                                    // Carousel items
+                                    .carousel-inner
+                                        .active.item(data-slide-number='0')
+                                            img(src='http://placehold.it/770x300&text=one')
+                                        .item(data-slide-number='1')
+                                            img(src='http://placehold.it/770x300&text=two')
+                                        .item(data-slide-number='2')
+                                            img(src='http://placehold.it/770x300&text=three')
+                                        .item(data-slide-number='3')
+                                            img(src='http://placehold.it/770x300&text=four')
+                                        .item(data-slide-number='4')
+                                            img(src='http://placehold.it/770x300&text=five')
+                                        .item(data-slide-number='5')
+                                            img(src='http://placehold.it/770x300&text=six')
+                                    // Carousel nav
+                                    a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+                                        span.glyphicon.glyphicon-chevron-left
+                                    a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+                                        span.glyphicon.glyphicon-chevron-right
+                            #carousel-text.col-sm-4
+                            #slide-content(style='display: none;')
+                                #slide-content-0
+                                    h2 Slider One
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                                #slide-content-1
+                                    h2 Slider Two
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                                #slide-content-2
+                                    h2 Slider Three
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                                #slide-content-3
+                                    h2 Slider Four
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                                #slide-content-4
+                                    h2 Slider Five
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                                #slide-content-5
+                                    h2 Slider Six
+                                    p Lorem Ipsum Dolor
+                                    p.sub-text
+                                        | October 24 2014 - 
+                                        a(href='#') Read more
+                // /Slider
+                #slider-thumbs.row.hidden-xs
+                    // Bottom switcher of slider
+                    ul.hide-bullets
+                        li.col-sm-2
+                            a#carousel-selector-0.thumbnail
+                                img(src='http://placehold.it/170x100&text=one')
+                        li.col-sm-2
+                            a#carousel-selector-1.thumbnail
+                                img(src='http://placehold.it/170x100&text=two')
+                        li.col-sm-2
+                            a#carousel-selector-2.thumbnail
+                                img(src='http://placehold.it/170x100&text=three')
+                        li.col-sm-2
+                            a#carousel-selector-3.thumbnail
+                                img(src='http://placehold.it/170x100&text=four')
+                        li.col-sm-2
+                            a#carousel-selector-4.thumbnail
+                                img(src='http://placehold.it/170x100&text=five')
+                        li.col-sm-2
+                            a#carousel-selector-5.thumbnail
+                                img(src='http://placehold.it/170x100&text=six')
+            
+
+
+        script.
+            jQuery(document).ready(function($) {
+                $('#myCarousel').carousel({
+                        interval: 5000
+                });
+        
+                $('#carousel-text').html($('#slide-content-0').html());
+            
+                    //Handles the carousel thumbnails
+                $('[id^=carousel-selector-]').click( function(){
+                    var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+                    var id = parseInt(id);
+                    $('#myCarousel').carousel(id);
+                });
+            
+            
+                // When the carousel slides, auto update the text
+                $('#myCarousel').on('slid.bs.carousel', function (e) {
+                        var id = $('.item.active').data('slide-number');
+                        $('#carousel-text').html($('#slide-content-'+id).html());
+                });
+            });
+        block script
+

@@ -10,7 +10,14 @@ if (window.location.hostname === "gist1.herokuapp.com") {
 
 var socket = io.connect(hostname);
 
-
+// var button = document.getElementById('refresh');
+// button.addEventListener("click", function() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
+//     } else {
+//         alert("Your Brouser is out of fashion, no support this browser");
+//     }
+// });
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });

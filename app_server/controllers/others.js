@@ -5,3 +5,7 @@ module.exports.about = function(req, res) {
         content: "Đồ án GIS ..............abc xyz........"
     });
 };
+
+module.exports.index = function(req, res) {
+    res.render("index", {});
+}

@@ -4,6 +4,7 @@ include _includes/sharedHTMLfunctions
 block head
     script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js')
     link(rel='stylesheet', href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css')
+        
 block content
     .row.page-header: .col-lg-12
             h1= pageHeader.title
@@ -29,11 +30,99 @@ block content
                         .panel-heading
                             h2.panel-title Menu
                         .panel-body
-                            each facility in location.facilities
-                                span.label.label-warning
-                                    span.glyphicon.glyphicon-ok
-                                    | &nbsp;#{facility}
-                                | &nbsp;
+                            //- each facility in location.facilities
+                            //-     span.label.label-warning
+                            //-         span.glyphicon.glyphicon-ok
+                            //-         | &nbsp;#{facility}
+                            //-     | &nbsp;
+                            // Menu picture
+                            #main_area
+                                // Slider
+                                .row
+                                    #slider.col-xs-12
+                                        // Top part of the slider
+                                        .row
+                                            #carousel-bounding-box.col-sm-8
+                                                #myCarousel.carousel.slide
+                                                    // Carousel items
+                                                    .carousel-inner
+                                                        .active.item(data-slide-number='0')
+                                                            img(src='http://file.vforum.vn/hinh/2018/02/hinh-cho-cuoi-deu-cho-de-thuong-12.jpg')
+                                                        .item(data-slide-number='1')
+                                                            img(src='https://thuthuattienich.com/wp-content/uploads/2017/06/anh-dai-dien-facebook-cho-meo-de-thuong-2.jpg')
+                                                        .item(data-slide-number='2')
+                                                            img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVG4GEqNWzWLM8wpBTEWd8BNdRJJUYAM_LUUqYzeKISa2m-cklA')
+                                                        .item(data-slide-number='3')
+                                                            img(src='https://4.bp.blogspot.com/-h5M1asWhJO4/VZKMbIYVD8I/AAAAAAAAAeE/oOrZZLMXvg8/s1600/hinh-anh-nhung-chu-cho-de-thuong-1.jpg')
+                                                        .item(data-slide-number='4')
+                                                            img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpB7VvIBUe1gLk1WvydO6p8DXE4Pkb_QSzTdihyB8PpjF0YIB3')
+                                                        .item(data-slide-number='5')
+                                                            img(src='http://streaming1.danviet.vn/upload/1-2016/images/2016-03-17/1458201425-cho-2.jpg')
+                                                    // Carousel nav
+                                                    a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+                                                        span.glyphicon.glyphicon-chevron-left
+                                                    a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+                                                        span.glyphicon.glyphicon-chevron-right
+                                            #carousel-text.col-sm-4
+                                            #slide-content(style='display: none;')
+                                                #slide-content-0
+                                                    h3 Stupid dog
+                                                    p Price: 25000
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                                #slide-content-1
+                                                    h3 Slider Two
+                                                    p Lorem Ipsum Dolor
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                                #slide-content-2
+                                                    h3 Slider Three
+                                                    p Lorem Ipsum Dolor
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                                #slide-content-3
+                                                    h3 Slider Four
+                                                    p Lorem Ipsum Dolor
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                                #slide-content-4
+                                                    h3 Slider Five
+                                                    p Lorem Ipsum Dolor
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                                #slide-content-5
+                                                    h3 Slider Six
+                                                    p Lorem Ipsum Dolor
+                                                    p.sub-text
+                                                        | October 24 2014 - 
+                                                        a(href='#') Read more
+                                // /Slider
+                                #slider-thumbs.row.hidden-xs
+                                    // Bottom switcher of slider
+                                    ul.hide-bullets
+                                        li.col-sm-2
+                                            a#carousel-selector-0.thumbnail
+                                                img(src='http://file.vforum.vn/hinh/2018/02/hinh-cho-cuoi-deu-cho-de-thuong-12.jpg')
+                                        li.col-sm-2
+                                            a#carousel-selector-1.thumbnail
+                                                img(src='https://thuthuattienich.com/wp-content/uploads/2017/06/anh-dai-dien-facebook-cho-meo-de-thuong-2.jpg')
+                                        li.col-sm-2
+                                            a#carousel-selector-2.thumbnail
+                                                img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVG4GEqNWzWLM8wpBTEWd8BNdRJJUYAM_LUUqYzeKISa2m-cklA')
+                                        li.col-sm-2
+                                            a#carousel-selector-3.thumbnail
+                                                img(src='https://4.bp.blogspot.com/-h5M1asWhJO4/VZKMbIYVD8I/AAAAAAAAAeE/oOrZZLMXvg8/s1600/hinh-anh-nhung-chu-cho-de-thuong-1.jpg')
+                                        li.col-sm-2
+                                            a#carousel-selector-4.thumbnail
+                                                img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpB7VvIBUe1gLk1WvydO6p8DXE4Pkb_QSzTdihyB8PpjF0YIB3')
+                                        li.col-sm-2
+                                            a#carousel-selector-5.thumbnail
+                                                img(src='http://streaming1.danviet.vn/upload/1-2016/images/2016-03-17/1458201425-cho-2.jpg')
                 .col-xs-12.col-sm-6.location-map
                     .panel.panel-primary
                         .panel-heading
@@ -64,6 +153,7 @@ block content
             p.lead #{sidebar.context}
             p= sidebar.callToAction
 block script
+    script(src="/javascripts/carousel.js")
     script.
         function getLocation(callback) {
             if (navigator.geolocation) {

@@ -21,3 +21,10 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
+/* carousel style */
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}

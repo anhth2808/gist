@@ -11,5 +11,7 @@ router.post('/location/:locationid/review/new', ctrlLocations.doAddReview);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
+router.get("/index", ctrlOthers.index);
+
 
 module.exports = router;

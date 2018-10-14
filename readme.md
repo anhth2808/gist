@@ -23,3 +23,10 @@ layout cần 1 nút refresh -> làm mới lại postion
     Tạo 1 cái chờ vài giây cho refresh
     Nâng cao: dùng socketio auto làm mới lại vị trí hiện tại (bỏ nút refresh)
 location-info tạo nút reload lại vị trí bản thân.
+
+Facilities
+    item: {
+        "name": "",
+        "img": "",
+        "price": "",
+    }
