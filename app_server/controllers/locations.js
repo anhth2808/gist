@@ -100,8 +100,8 @@ module.exports.locationInfo = function(req, res){
 
 var renderReviewForm = function (req, res, locDetail) {
     res.render('location-review-form', {
-        title: 'Review ' + locDetail.name + ' on Loc8r',
-        pageHeader: { title: 'Review ' + locDetail.name },
+        title: 'Đánh giá ' + locDetail.name,
+        pageHeader: { title: 'Đánh giá ' + locDetail.name },
         error: req.query.err
     });
 };

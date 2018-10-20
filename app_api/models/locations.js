@@ -15,6 +15,13 @@ var reviewSchema = new mongoose.Schema({
     }
 });
 
+var facilitieSchema = new mongoose.Schema({
+    title: { type: String},
+    image: { type: String},
+    price: { type: Number, default: 0},
+    description: { type: String}
+});
+
 var openingTimeSchema = new mongoose.Schema({
     days: {
         type: String,
@@ -40,7 +47,7 @@ var locationSchema = new mongoose.Schema({
         min: 0,
         max: 5
     },
-    facilities: [String],
+    facilities: [facilitieSchema],
     // Always store coordinates longitude, latitude order.
     coords: {
         type: [Number],

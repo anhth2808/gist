@@ -87,7 +87,7 @@ function updateItem(data) {
         var facilities = function (fac) {
             let facilities = "";
             for (let i = 0; i < fac.length; i++) {
-                facilities += `<span class="label label-warning">${fac[i]}</span>&nbsp;`
+                facilities += `<span class="label label-warning">${fac[i].title}</span>&nbsp;`
             }
             return facilities;
         }(item.facilities);

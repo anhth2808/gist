@@ -88,7 +88,7 @@ module.exports.locationsReadOne = function(req, res) {
                     sendJSONresponse(res, 404, err);
                     return;
                 }
-                // console.log("location:", location);
+                console.log("location:", location);
                 sendJSONresponse(res, 200, location);
             });
     } else {
@@ -105,7 +105,7 @@ module.exports.locationsCreate = function(req, res) {
     Loc.create({
         name: req.body.name,
         address: req.body.address,
-        facilities: req.body.facilities.split(","),
+        facilities: req.body.facilities,
         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         openingTimes: [{
             days: req.body.days1,
@@ -152,7 +152,7 @@ module.exports.locationsUpdateOne = function(req, res) {
                 }
                 location.name = req.body.name;
                 location.address = req.body.address;
-                location.facilities = req.body.facilities.split(",");
+                location.facilities = req.body.facilities;
                 location.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
                 location.openingTimes = [{
                     days: req.body.days1,

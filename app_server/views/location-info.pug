@@ -46,18 +46,7 @@ block content
                                                 #myCarousel.carousel.slide
                                                     // Carousel items
                                                     .carousel-inner
-                                                        .active.item(data-slide-number='0')
-                                                            img(src='http://file.vforum.vn/hinh/2018/02/hinh-cho-cuoi-deu-cho-de-thuong-12.jpg')
-                                                        .item(data-slide-number='1')
-                                                            img(src='https://thuthuattienich.com/wp-content/uploads/2017/06/anh-dai-dien-facebook-cho-meo-de-thuong-2.jpg')
-                                                        .item(data-slide-number='2')
-                                                            img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVG4GEqNWzWLM8wpBTEWd8BNdRJJUYAM_LUUqYzeKISa2m-cklA')
-                                                        .item(data-slide-number='3')
-                                                            img(src='https://4.bp.blogspot.com/-h5M1asWhJO4/VZKMbIYVD8I/AAAAAAAAAeE/oOrZZLMXvg8/s1600/hinh-anh-nhung-chu-cho-de-thuong-1.jpg')
-                                                        .item(data-slide-number='4')
-                                                            img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpB7VvIBUe1gLk1WvydO6p8DXE4Pkb_QSzTdihyB8PpjF0YIB3')
-                                                        .item(data-slide-number='5')
-                                                            img(src='http://streaming1.danviet.vn/upload/1-2016/images/2016-03-17/1458201425-cho-2.jpg')
+                                                        +carouselInner(location.facilities)
                                                     // Carousel nav
                                                     a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
                                                         span.glyphicon.glyphicon-chevron-left
@@ -65,68 +54,22 @@ block content
                                                         span.glyphicon.glyphicon-chevron-right
                                             #carousel-text.col-sm-4
                                             #slide-content(style='display: none;')
-                                                #slide-content-0
-                                                    h3 Stupid dog
-                                                    p Price: 25000
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
-                                                #slide-content-1
-                                                    h3 Slider Two
-                                                    p Lorem Ipsum Dolor
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
-                                                #slide-content-2
-                                                    h3 Slider Three
-                                                    p Lorem Ipsum Dolor
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
-                                                #slide-content-3
-                                                    h3 Slider Four
-                                                    p Lorem Ipsum Dolor
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
-                                                #slide-content-4
-                                                    h3 Slider Five
-                                                    p Lorem Ipsum Dolor
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
-                                                #slide-content-5
-                                                    h3 Slider Six
-                                                    p Lorem Ipsum Dolor
-                                                    p.sub-text
-                                                        | October 24 2014 - 
-                                                        a(href='#') Read more
+                                                +carouselText(location.facilities)
                                 // /Slider
                                 #slider-thumbs.row.hidden-xs
                                     // Bottom switcher of slider
                                     ul.hide-bullets
-                                        li.col-sm-2
-                                            a#carousel-selector-0.thumbnail
-                                                img(src='http://file.vforum.vn/hinh/2018/02/hinh-cho-cuoi-deu-cho-de-thuong-12.jpg')
-                                        li.col-sm-2
-                                            a#carousel-selector-1.thumbnail
-                                                img(src='https://thuthuattienich.com/wp-content/uploads/2017/06/anh-dai-dien-facebook-cho-meo-de-thuong-2.jpg')
-                                        li.col-sm-2
-                                            a#carousel-selector-2.thumbnail
-                                                img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVG4GEqNWzWLM8wpBTEWd8BNdRJJUYAM_LUUqYzeKISa2m-cklA')
-                                        li.col-sm-2
-                                            a#carousel-selector-3.thumbnail
-                                                img(src='https://4.bp.blogspot.com/-h5M1asWhJO4/VZKMbIYVD8I/AAAAAAAAAeE/oOrZZLMXvg8/s1600/hinh-anh-nhung-chu-cho-de-thuong-1.jpg')
-                                        li.col-sm-2
-                                            a#carousel-selector-4.thumbnail
-                                                img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpB7VvIBUe1gLk1WvydO6p8DXE4Pkb_QSzTdihyB8PpjF0YIB3')
-                                        li.col-sm-2
-                                            a#carousel-selector-5.thumbnail
-                                                img(src='http://streaming1.danviet.vn/upload/1-2016/images/2016-03-17/1458201425-cho-2.jpg')
+                                        +carouselThumb(location.facilities)
                 .col-xs-12.col-sm-6.location-map
                     .panel.panel-primary
                         .panel-heading
                             h2.panel-title Vị trí bản đồ
+                                #reload.btn.btn-default.btn-sm(style="margin-left: 30px; color: red;")
+                                    span.glyphicon.glyphicon-repeat
+                                #fly-to-start.btn.btn-default.btn-sm(style="margin-left: 30px; color: red;")
+                                    span.glyphicon.glyphicon-screenshot
+                                #fly-to-end.btn.btn-default.btn-sm(style="margin-left: 30px; color: red;")
+                                    span.glyphicon.glyphicon-send
                         .panel-body
                             #map(style="height: 400px;")
                             #instructions
@@ -178,6 +121,39 @@ block script
             zoom: 16
         });
 
+        document.getElementById('reload').addEventListener('click', function () {
+            getLocation(function(lat_lng) {  
+                console.log(lat_lng);
+                var start = [lat_lng.lng, lat_lng.lat];
+                var end = [!{location.coords.lng}, !{location.coords.lat}];
+                var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+                $.ajax({
+                    method: 'GET',
+                    url: directionsRequest,
+                }).done(function (data) {
+                    var route = data.routes[0].geometry;
+                    console.log(route);
+
+                    map.getSource("route").setData({
+                        type: 'Feature',
+                        geometry: route
+                    });
+                    console.log("success");
+                    //- console.log(map.getSource("route"));
+                    
+                    //- map.getSource("route").setData({
+                    //-     "type": "geojson",
+                    //-     "data": {
+                    //-         "type": "Feature",
+                    //-         "geometry": route
+                    //-     }
+                    //- });
+                });
+                
+            });
+        });
+
+    
         // this is where the code from the next step will go
         map.on('load', function () {
             getLocation(function (lat_lng) {
@@ -211,14 +187,25 @@ block script
                     startMarker.className = 'start-marker';
                     cafeMarker.className = 'cafe-marker';
                     
-
-
                     new mapboxgl.Marker(startMarker)
                         .setLngLat(start)
                         .addTo(map);
                     new mapboxgl.Marker(cafeMarker)
                         .setLngLat(end)
                         .addTo(map);
+
+                    
+                    document.getElementById('fly-to-start').addEventListener('click', function () {
+                        map.flyTo({
+                            center: start
+                        });
+                    });
+                    document.getElementById('fly-to-end').addEventListener('click', function () {
+                        map.flyTo({
+                            center: end
+                        });
+                    });
                 });
             });
         });
+

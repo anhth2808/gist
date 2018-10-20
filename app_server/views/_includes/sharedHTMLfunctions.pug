@@ -13,3 +13,31 @@ mixin formatDate(dateString)
     -var y = date.getFullYear();
     -var output = d + ' ' + m + ' ' + y;
     =output
+
+mixin carouselInner(facilities)
+    - for (var i = 0; i < facilities.length; i++)
+        - if (i === 0) {
+            .active.item(data-slide-number=i)
+                img(src=facilities[i].image)
+        - }
+        - else
+            .item(data-slide-number=i)
+                img(src=facilities[i].image)
+
+mixin carouselText(facilities)
+    - var i = 0
+    each facility in facilities
+        div(id="slide-content-" + i)
+            h3 #{facility.title}
+            p #{facility.description}
+            p.sub-text
+                | Giá: #{facility.price}
+        - i++
+
+mixin carouselThumb(facilities)
+    - var i = 0
+    each facility in facilities
+        li.col-sm-2
+                a.thumbnail(id="#carousel-selector-" + i)
+                    img(src=facility.image)
+        - i++
