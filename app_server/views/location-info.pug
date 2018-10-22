@@ -35,19 +35,19 @@ block content
                             //-         span.glyphicon.glyphicon-ok
                             //-         | &nbsp;#{facility}
                             //-     | &nbsp;
-                            // Menu picture
+                            //- Menu picture
                             #main_area
-                                // Slider
+                                //- Slider
                                 .row
                                     #slider.col-xs-12
-                                        // Top part of the slider
+                                        //- Top part of the slider
                                         .row
                                             #carousel-bounding-box.col-sm-8
                                                 #myCarousel.carousel.slide
-                                                    // Carousel items
+                                                    //- Carousel items
                                                     .carousel-inner
                                                         +carouselInner(location.facilities)
-                                                    // Carousel nav
+                                                    //- Carousel nav
                                                     a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
                                                         span.glyphicon.glyphicon-chevron-left
                                                     a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
@@ -55,9 +55,9 @@ block content
                                             #carousel-text.col-sm-4
                                             #slide-content(style='display: none;')
                                                 +carouselText(location.facilities)
-                                // /Slider
+                                //- Slider
                                 #slider-thumbs.row.hidden-xs
-                                    // Bottom switcher of slider
+                                    //- Bottom switcher of slider
                                     ul.hide-bullets
                                         +carouselThumb(location.facilities)
                 .col-xs-12.col-sm-6.location-map
@@ -98,6 +98,9 @@ block content
 block script
     script(src="/javascripts/carousel.js")
     script.
+        //- this is the current user marker use in global
+        var currentUserMarker;
+        
         function getLocation(callback) {
             if (navigator.geolocation) {
                 var lat_lng = navigator.geolocation.getCurrentPosition(function (position) {
@@ -111,6 +114,22 @@ block script
             }
         }
         
+        function createCafeMarker(listCoords) {
+            console.log(listCoords);
+
+            listCoords.forEach(function(item) {
+                let cafeMarker = document.createElement('div');
+                cafeMarker.className = 'cafe-marker';
+
+                let popup = new mapboxgl.Popup({offset: 25})
+                    .setHTML(`<a style="color: red" href="/location/${item._id}">${item.name}</a>`)
+
+                new mapboxgl.Marker(cafeMarker)
+                    .setLngLat(item.coords)
+                    .setPopup(popup)
+                    .addTo(map);
+            })
+        }
 
 
         mapboxgl.accessToken = 'pk.eyJ1IjoidHJhZWg5OCIsImEiOiJjam1ldG02aWwxa2lkM2xueTZwbTZrcnV0In0.yq2V65aPuv5-ufol-3SC5w';
@@ -121,6 +140,8 @@ block script
             zoom: 16
         });
 
+
+        //- reload map
         document.getElementById('reload').addEventListener('click', function () {
             getLocation(function(lat_lng) {  
                 console.log(lat_lng);
@@ -132,29 +153,27 @@ block script
                     url: directionsRequest,
                 }).done(function (data) {
                     var route = data.routes[0].geometry;
-                    console.log(route);
+                    //- console.log(route);
 
+
+                    //- new user marker
+                    currentUserMarker.setLngLat(lat_lng);
+
+                    //- new direction route
                     map.getSource("route").setData({
                         type: 'Feature',
                         geometry: route
                     });
                     console.log("success");
-                    //- console.log(map.getSource("route"));
-                    
-                    //- map.getSource("route").setData({
-                    //-     "type": "geojson",
-                    //-     "data": {
-                    //-         "type": "Feature",
-                    //-         "geometry": route
-                    //-     }
-                    //- });
                 });
                 
             });
         });
 
+
+
     
-        // this is where the code from the next step will go
+        //- create map when user load page
         map.on('load', function () {
             getLocation(function (lat_lng) {
                 console.log(lat_lng);
@@ -183,18 +202,15 @@ block script
                     });
 
                     var startMarker = document.createElement('div');
-                    var cafeMarker = document.createElement('div');
                     startMarker.className = 'start-marker';
-                    cafeMarker.className = 'cafe-marker';
                     
-                    new mapboxgl.Marker(startMarker)
+                    currentUserMarker = new mapboxgl.Marker(startMarker)
                         .setLngLat(start)
                         .addTo(map);
-                    new mapboxgl.Marker(cafeMarker)
-                        .setLngLat(end)
-                        .addTo(map);
 
-                    
+                    var listCoords = JSON.parse('!{JSON.stringify(location.listCoords)}');
+                    createCafeMarker(listCoords);
+
                     document.getElementById('fly-to-start').addEventListener('click', function () {
                         map.flyTo({
                             center: start
