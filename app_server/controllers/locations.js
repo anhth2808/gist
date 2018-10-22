@@ -33,24 +33,26 @@ var _showError = function (req, res, status) {
         content : content
     });
 };
+var getListCoords = function(req, res, data, callback) {
+    var requestOptions, path;
 
-
-
-
-var renderHomepage = function(req, res){
-    res.render('locations-list', {
-        title: 'GIST - tìm một tiệm caffe có wifi gần bạn!',
-        pageHeader: {
-            title: 'GIST',
-            strapline: 'Tìm một tiệm caffe có wifi gần bạn!'
-        },
-        sidebar: "Bạn muốn một chỗ ngồi với wifi? Với GIS bạn có thể tìm một tiệm cafe gần bạn.",
-    });
-};
-
-/* GET 'home' page */
-module.exports.homelist = function(req, res){
-    renderHomepage(req, res);
+    path = "/api/listcoords";
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "GET",
+        json: {}
+    };
+    request(
+        requestOptions,
+        function(err, response, body) {
+            if (response.statusCode === 200) {
+                data.listCoords = body;
+                callback(req, res, data);
+            } else {
+                _showError(req, res, response.statusCode)
+            }
+        }
+    )
 };
 
 var getLocationInfo = function (req, res, callback) {
@@ -79,6 +81,25 @@ var getLocationInfo = function (req, res, callback) {
     );
 };
 
+
+var renderHomepage = function(req, res){
+    res.render('locations-list', {
+        title: 'GIST - tìm một tiệm caffe có wifi gần bạn!',
+        pageHeader: {
+            title: 'GIST',
+            strapline: 'Tìm một tiệm caffe có wifi gần bạn!'
+        },
+        sidebar: "Bạn muốn một chỗ ngồi với wifi? Với GIS bạn có thể tìm một tiệm cafe gần bạn.",
+    });
+};
+
+/* GET 'home' page */
+module.exports.homelist = function(req, res){
+    renderHomepage(req, res);
+};
+
+
+
 var renderDetailPage = function (req, res, locDetail) {
     res.render('location-info', {
         title: locDetail.name,
@@ -91,10 +112,18 @@ var renderDetailPage = function (req, res, locDetail) {
     });
 };
 
+
+
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res){
+    // getLocationInfo(req, res, function(req, res, responseData) {
+    //     renderDetailPage(req, res, responseData);
+    // });
     getLocationInfo(req, res, function(req, res, responseData) {
-        renderDetailPage(req, res, responseData);
+        getListCoords(req, res, responseData, function(req, res, responseData) {
+            console.log(responseData);
+            renderDetailPage(req, res, responseData);
+        });
     });
 };
 
