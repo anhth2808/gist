@@ -199,3 +199,23 @@ module.exports.locationsDeleteOne = function(req, res) {
         });
     }
 };
+
+
+/* GET /api/locations/listcoords */
+module.exports.locationsListCoords = function(req, res) {
+    Loc
+        .find()
+        .select("name coords")
+        .exec(function(err, list) {
+            if (!list) {
+                sendJSONresponse(res, 404, {
+                    "message": "List is not found"
+                });
+                return;
+            } else if (err) {
+                sendJSONresponse(res, 404, err);
+                return;
+            }
+            sendJSONresponse(res, 200, list);
+        });
+}
