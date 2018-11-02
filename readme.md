@@ -18,7 +18,7 @@ Mapbox note
     locate the user  // cho biết vị trí hiện tại
     mapbox-gl-directions https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-directions/
 
-// note
+// note 1
 layout cần 1 nút refresh -> làm mới lại postion
     Tạo 1 cái chờ vài giây cho refresh
     Nâng cao: dùng socketio auto làm mới lại vị trí hiện tại (bỏ nút refresh)
@@ -30,3 +30,23 @@ Facilities
         "img": "",
         "price": "",
     }
+
+"coords": [
+        109.19980173438074,
+        12.267545512815133
+    ]
+
+"coords": [
+        109.20363769788345,
+        12.26730537950715
+    ]
+
+"coords": [
+        109.19953582270443,
+        12.26893514739784
+    ]
+
+
+// note 2
+JSON.parse('!{JSON.stringify(location.listCoords)}')
+câu lệnh thần thánh chuyển data từ pug qua js thành obj dùng được.

@@ -84,10 +84,10 @@ var getLocationInfo = function (req, res, callback) {
 
 var renderHomepage = function(req, res){
     res.render('locations-list', {
-        title: 'GIST - tìm một tiệm caffe có wifi gần bạn!',
+        title: 'GIST - tìm một tiệm cafe có wifi gần bạn!',
         pageHeader: {
             title: 'GIST',
-            strapline: 'Tìm một tiệm caffe có wifi gần bạn!'
+            strapline: 'Tìm một tiệm cafe có wifi gần bạn!'
         },
         sidebar: "Bạn muốn một chỗ ngồi với wifi? Với GIS bạn có thể tìm một tiệm cafe gần bạn.",
     });

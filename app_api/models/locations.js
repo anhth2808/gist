@@ -22,6 +22,13 @@ var facilitieSchema = new mongoose.Schema({
     description: { type: String}
 });
 
+var descriptionSchema = new mongoose.Schema({
+    title: {type: String},
+    image: {type: String},
+    description: {type: String}
+});
+
+
 var openingTimeSchema = new mongoose.Schema({
     days: {
         type: String,
@@ -48,6 +55,7 @@ var locationSchema = new mongoose.Schema({
         max: 5
     },
     facilities: [facilitieSchema],
+    descriptions: [descriptionSchema],
     // Always store coordinates longitude, latitude order.
     coords: {
         type: [Number],
@@ -56,7 +64,7 @@ var locationSchema = new mongoose.Schema({
     openingTimes: [openingTimeSchema],
     reviews: [reviewSchema]
 }, {
-    usePushEach: true // add this becasue $push all is nolonger support in mongose 3.4>
+    usePushEach: true // add this becasue $pushall is nolonger support in mongose 3.4>
 });
 
 mongoose.model('Location', locationSchema);

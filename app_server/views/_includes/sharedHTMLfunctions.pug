@@ -14,30 +14,30 @@ mixin formatDate(dateString)
     -var output = d + ' ' + m + ' ' + y;
     =output
 
-mixin carouselInner(facilities)
-    - for (var i = 0; i < facilities.length; i++)
+mixin carouselInner(descriptions)
+    - for (var i = 0; i < descriptions.length; i++)
         - if (i === 0) {
             .active.item(data-slide-number=i)
-                img(src=facilities[i].image)
+                img(src=descriptions[i].image)
         - }
         - else
             .item(data-slide-number=i)
-                img(src=facilities[i].image)
+                img(src=descriptions[i].image)
 
-mixin carouselText(facilities)
+mixin carouselText(descriptions)
     - var i = 0
-    each facility in facilities
+    each descrip in descriptions
         div(id="slide-content-" + i)
-            h3 #{facility.title}
-            p #{facility.description}
-            p.sub-text
-                | Giá: #{facility.price}
+            h3 #{descrip.title}
+            p #{descrip.description}
+            //- p.sub-text
+            //-     | Giá: #{facility.price}
         - i++
 
-mixin carouselThumb(facilities)
+mixin carouselThumb(descriptions)
     - var i = 0
-    each facility in facilities
+    each descrip in descriptions
         li.col-sm-2
                 a.thumbnail(id="#carousel-selector-" + i)
-                    img(src=facility.image)
+                    img(src=descrip.image)
         - i++

@@ -106,6 +106,7 @@ module.exports.locationsCreate = function(req, res) {
         name: req.body.name,
         address: req.body.address,
         facilities: req.body.facilities,
+        descriptions: req.body.descriptions,
         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         openingTimes: [{
             days: req.body.days1,
@@ -153,6 +154,7 @@ module.exports.locationsUpdateOne = function(req, res) {
                 location.name = req.body.name;
                 location.address = req.body.address;
                 location.facilities = req.body.facilities;
+                location.descriptions = req.body.descriptions;
                 location.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
                 location.openingTimes = [{
                     days: req.body.days1,
@@ -205,7 +207,7 @@ module.exports.locationsDeleteOne = function(req, res) {
 module.exports.locationsListCoords = function(req, res) {
     Loc
         .find()
-        .select("name coords")
+        .select("name coords rating")
         .exec(function(err, list) {
             if (!list) {
                 sendJSONresponse(res, 404, {

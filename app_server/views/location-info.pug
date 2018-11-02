@@ -28,7 +28,7 @@ block content
                                         | #{time.opening} - #{time.closing}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Menu
+                            h2.panel-title Ảnh
                         .panel-body
                             //- each facility in location.facilities
                             //-     span.label.label-warning
@@ -46,7 +46,7 @@ block content
                                                 #myCarousel.carousel.slide
                                                     //- Carousel items
                                                     .carousel-inner
-                                                        +carouselInner(location.facilities)
+                                                        +carouselInner(location.descriptions)
                                                     //- Carousel nav
                                                     a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
                                                         span.glyphicon.glyphicon-chevron-left
@@ -54,12 +54,12 @@ block content
                                                         span.glyphicon.glyphicon-chevron-right
                                             #carousel-text.col-sm-4
                                             #slide-content(style='display: none;')
-                                                +carouselText(location.facilities)
+                                                +carouselText(location.descriptions)
                                 //- Slider
                                 #slider-thumbs.row.hidden-xs
                                     //- Bottom switcher of slider
                                     ul.hide-bullets
-                                        +carouselThumb(location.facilities)
+                                        +carouselThumb(location.descriptions)
                 .col-xs-12.col-sm-6.location-map
                     .panel.panel-primary
                         .panel-heading
@@ -122,7 +122,11 @@ block script
                 cafeMarker.className = 'cafe-marker';
 
                 let popup = new mapboxgl.Popup({offset: 25})
-                    .setHTML(`<a style="color: red" href="/location/${item._id}">${item.name}</a>`)
+                    .setHTML(`
+                    <a style="color: red" href="/location/${item._id}">${item.name}</a>
+                    </br>
+                    <p style="color: black">Đánh Giá: ${item.rating} <span class="glyphicon glyphicon-star-empty"></span></p>
+                    `)
 
                 new mapboxgl.Marker(cafeMarker)
                     .setLngLat(item.coords)
@@ -153,8 +157,6 @@ block script
                     url: directionsRequest,
                 }).done(function (data) {
                     var route = data.routes[0].geometry;
-                    //- console.log(route);
-
 
                     //- new user marker
                     currentUserMarker.setLngLat(lat_lng);
