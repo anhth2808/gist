@@ -11,11 +11,22 @@ if (window.location.hostname === "gist1.herokuapp.com") {
 var socket = io.connect(hostname);
 
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
-} else {
-    alert("Your Brouser is out of fashion, no support this browser");
+// if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
+// } else {
+//     alert("Your Brouser is out of fashion, no support this browser");
+// }
+
+function onGeolocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
+    } else {
+        alert("Your Brouser is out of fashion, no support this browser");
+    }
 }
+
+var firstClick = document.getElementById('refresh');
+firstClick.addEventListener("click", onGeolocation)
 
 function positionSuccess(position) {
     var lat = position.coords.latitude;
@@ -23,6 +34,7 @@ function positionSuccess(position) {
     var acr = position.coords.accuracy;
     console.log(lat, lng, acr);
     var btn = document.getElementById('refresh');
+    btn.removeEventListener("click", onGeolocation)
     btn.addEventListener("click", function () {
         var sentData = {
             coords: {
@@ -33,19 +45,6 @@ function positionSuccess(position) {
         };
         socket.emit("send:coords", sentData);
     });
-
-    // window.addEventListener("load", function() {
-    //     console.log("load", window.location.href);
-
-    //     var sentData = {
-    //         coords: {
-    //             lat: lat,
-    //             lng: lng,
-    //             acr: acr
-    //         }
-    //     };
-    //     socket.emit("send:coords", sentData);
-    // });
 }
 
 
