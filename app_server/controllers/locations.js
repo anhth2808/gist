@@ -89,7 +89,7 @@ var renderHomepage = function(req, res){
             title: 'GIST',
             strapline: 'Tìm một tiệm cafe có wifi gần bạn!'
         },
-        sidebar: "Bạn muốn một chỗ ngồi với wifi? Với GIS bạn có thể tìm một tiệm cafe gần bạn.",
+        sidebar: "Bạn có thể tìm quán cafe trong phạm vi bán kính gần bạn nhất !!!",
     });
 };
 
